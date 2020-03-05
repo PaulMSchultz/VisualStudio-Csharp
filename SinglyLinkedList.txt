@@ -1,0 +1,262 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudyGroup4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            Node someNode = new Node(7);
+            Node anotherNode = new Node(11);
+
+            anotherNode.Next = someNode;
+
+            SinglyLinkedList myList = new SinglyLinkedList(); // initializing the linked list
+            myList.print();
+
+            myList.AddFirst(1);
+            myList.AddFirst(2);
+            myList.AddFirst(3);
+            //myList.print();
+
+            myList.Append(4);
+            myList.Append(5);
+            myList.Append(6);
+            //myList.print();            
+
+            myList.AddLast(7);
+            myList.AddLast(8);
+            myList.AddLast(9);
+            //myList.print();
+
+            myList.DeleteFirst();
+            //myList.print();
+            myList.DeleteFirst();
+            //myList.print();
+            myList.DeleteFirst();
+            //myList.print();
+
+            myList.Insert(10, 3); // 10 at index 3
+            myList.print();
+
+            myList.Delete(4); // delete index 4
+            myList.print();
+
+            //try
+            //{
+            //    myList.DeleteFirst();
+            //    myList.print();
+            //    myList.DeleteFirst();
+            //    myList.print();
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}            
+
+            //LinkedList<int> myList2 = new LinkedList<int>(); // c# has a linkedlist already
+
+        }
+
+        class Node
+        {
+            // To store
+            public int Value { get; set; }
+            public Node Next { get; set; }
+
+            //ctor - constructor
+            public Node(int someVal)
+            {
+                Value = someVal;
+                //Next = null; this is default so it is not necessary to write it
+            }
+
+
+        }
+
+        class SinglyLinkedList
+        {
+            //data (store the head)            
+
+            Node head; //reference or 'pointer'
+
+            //behavior
+
+            //AddFirst
+            public void AddFirst(int someValue)
+            {
+                //create new node
+                Node newNode = new Node(someValue);
+
+                //link in the new node
+                newNode.Next = head;
+
+                //move the head to the left
+                head = newNode;
+            }
+
+            //AddLast / Append
+            public void Append(int someValue)
+            {
+                AddLast(someValue);
+            }
+            public void AddLast(int someValue)
+            {
+                if(head == null)
+                {
+                    AddFirst(someValue);
+                    return;
+                }
+                // create a new node
+                Node newNode = new Node(someValue);
+
+                //traverse the list to get to the last not null node in the list
+                Node finger = head;                
+                while(finger.Next != null)
+                {
+                    finger = finger.Next;
+                }
+                // when you get here finger points to the last not null node
+                //link in the new node
+                finger.Next = newNode;
+            }
+
+            //DeleteFirst
+            public void DeleteFirst()
+            {
+                if (head == null) // edge case
+                {
+                    throw new Exception("you cannot 'DeleteFirst()' from an empty list");
+                }
+                else
+                {
+                    head = head.Next; // move the head, let the GC garbage collector deallocate memory
+                }
+                
+            }
+
+            //DeleteLast
+            public void DeleteLast()
+            {
+                if(head == null) // edgecase
+                {
+                    throw new Exception("you cannot delete last from an empty list"); 
+                    // return; or just put the rest into an else block
+                }
+                else if(head.Next == null) // when there is only one node
+                {
+                    head = null;
+                }
+                else
+                {
+                    Node finger = head;
+                    while (finger.Next.Next != null)
+                    {
+                        finger = finger.Next; // move right
+                    }
+
+                    // now finger points to the node before the last in the list
+                    // linkout the last node
+                    finger.Next = null;
+                }
+               
+            }
+
+            //Insert (assuming the data is sorted) insert to keep it sorted)
+            public void Insert(int someValue, int index)
+            {
+                //if list is null and position == 0
+                if(index == 0 && head == null)
+                {
+                    AddFirst(someValue);
+                    return;
+                }
+
+                Node newNode = new Node(someValue);
+
+                //need to find the node at position at index-1
+                Node finger = head;
+                for (int pos = 0; finger.Next!=null && pos < index-1; pos++)
+                {
+                    if (finger == null)
+                    {
+                        Console.WriteLine("Error");
+                        return;
+                    }
+                    finger = finger.Next;
+                }                
+                //link in the node
+                newNode.Next = finger.Next;
+                finger.Next = newNode;
+            }
+
+            //Delete
+            public void Delete(int index)
+            {
+                if(index < 0)
+                {
+                    return;
+                }
+
+                if (index == 0)
+                {
+                    DeleteFirst();
+                }
+                else
+                {
+                    //need to find the node at position at index-1
+                    Node finger = head;
+                    for (int pos = 0; finger != null && pos < index-1; pos++)
+                    {
+                        if (finger == null)
+                        {
+                            Console.WriteLine("Error");
+                            return;
+                        }
+                        finger = finger.Next;
+                    }
+
+                    //linkout
+                    if(finger.Next != null)
+                    {
+                        finger.Next = finger.Next.Next;
+                    }
+                    
+                }
+            }
+
+            //Print / Traverse / Iterate through
+            public void print()
+            {
+                if(head == null) // if the list is empty
+                {
+                    Console.WriteLine("The list is empty");
+                }
+                else
+                {
+                    Node finger = head;
+
+                    while(finger != null)
+                    {
+                        Console.Write(finger.Value + " ");
+                        finger = finger.Next; // move finger to the right
+                    }
+                    Console.WriteLine();
+                }
+            }
+
+            //ctor constructor - to initialize the instance
+            public SinglyLinkedList()
+            {
+                //head = null; this is default so we dont have to type it
+            }
+
+        }
+
+    }
+}
