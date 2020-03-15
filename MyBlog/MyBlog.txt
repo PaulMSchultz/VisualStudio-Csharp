@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My Blog</title>
+		<link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+	</head>
+	
+	<body>
+		<!-- header start -->
+		<div id="header" class="section">
+			<img alt="" class="img-circle" src="https://github.com/PaulMSchultz/VisualStudio-Csharp/blob/master/png/IMG_22322.jpg">
+			<p>Paul M. Schultz</p>
+		</div>
+		<!-- header end -->
+		
+		<!-- About Me section start -->
+		<div class="section">
+			<h1><span>About Me</span></h1>
+			<p>
+				Hello! I'm <strong>Paul</strong>. I am an aspiring <strong>engineer/developer</strong> with 11 years of experience in IT and Aviation. My time in the <i>military</i> has taught me the value of being a part of something bigger than myself. I’ve had the opportunity to travel the world, interact with and work in teams from very diverse backgrounds, and I’ve had to learn to lean-on and support those around me to accomplish common goals. I offer <strong>creative solutions</strong> to <strong>complex problems</strong>, and I am a very <strong>determined</strong> individual who always inspires <strong>positivity</strong>.
+			</p>
+			<p class="quote">"Plans are useless, but planning is everything."</p>
+		</div>
+		<!-- About Me section end -->	
+		
+		<!-- My Skills section start -->
+		<div class="section">
+			<h1><span>My Skills</span></h1>
+			<ul>
+				<li>C# <br />
+					<progress min="0" max="100" value="60"></progress>
+				</li>
+                                <li>.NET <br />
+					<progress min="0" max="100" value="50"></progress>
+				</li>
+				<li>Python <br />
+					<progress min="0" max="100" value="50"></progress>
+				</li>
+				<li>TSQL <br />
+					<progress min="0" max="100" value="50"></progress>
+				</li>
+                                <li>Azure <br />
+					<progress min="0" max="100" value="20"></progress>
+				</li>
+                                <li>HTML <br />
+					<progress min="0" max="100" value="20"></progress>
+				</li>
+                                <li>CSS <br />
+					<progress min="0" max="100" value="20"></progress>
+				</li>
+                                <li>JavaScript <br />
+					<progress min="0" max="100" value="20"></progress>
+				</li>
+			</ul>
+		</div>
+		<!-- My Skills section end -->
+				
+		<!-- Form section start -->
+	   <div class="section">
+			<h1><span>Contact Me</span></h1>
+							 
+			<form>
+				<input name="name" placeholder="Name" type="text" required /><br/>
+				<input name="email" placeholder="Email" type="email" required /><br/>
+				<textarea name="message" placeholder="Message" required ></textarea>
+				<input type="submit" value="SEND" class="submit" />
+			</form>
+		</div>
+		<!-- Form section end -->
+		
+		<!-- Contacts section start -->
+		<div class="section" id="contacts">
+			<h1><span>Follow Me</span></h1>
+			<div>
+				<a href="https://github.com/PaulMSchultz">
+					<img alt="Github" src="https://github.com/PaulMSchultz/VisualStudio-Csharp/blob/master/png/github-icon-png-1-original.png"/>
+				</a>
+				<a href="https://www.linkedin.com/in/paulmschultz/">
+					<img alt="LinkedIn" src="https://github.com/PaulMSchultz/VisualStudio-Csharp/blob/master/png/linkedin-logo-png-1826.png"/>
+				</a>
+			</div>
+		</div>
+		<!-- Contacts section end -->
+		
+		<div class="copyright">
+			&copy; 2020 My Blog. All rights reserved.
+		</div>
+		
+	</body>
+</html>
