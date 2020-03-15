@@ -1,0 +1,7 @@
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\bin\Debug\Prestige.Biz.exe.config
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\bin\Debug\Prestige.Biz.exe
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\bin\Debug\Prestige.Biz.pdb
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\obj\Debug\Prestige.Biz.csprojAssemblyReference.cache
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\obj\Debug\Prestige.Biz.csproj.CoreCompileInputs.cache
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\obj\Debug\Prestige.Biz.exe
+C:\Users\schul\source\repos\BestPractices\Prestige.Biz\obj\Debug\Prestige.Biz.pdb
