@@ -1,0 +1,92 @@
+public class Kata
+{
+  public static object FirstNonConsecutive(int[] arr)
+  {
+    int curr = arr[0];
+    
+    for(int i=1;i<arr.Length;i++)
+    {
+      if(curr + 1 != arr[i])
+      {
+        return arr[i];        
+      }
+      curr++;
+    }
+    return null;
+  }
+}
+
+-------------------------------------------------------------------
+
+Test Cases:
+namespace Solution {
+  using NUnit.Framework;
+  using System.Collections.Generic;
+  using System.Linq;
+  using System;
+
+  [TestFixture]
+  public class Test
+  {
+    [Test]
+    public void SimpleTest()
+    {
+      Assert.AreEqual(6, Kata.FirstNonConsecutive(new int[] {1, 2, 3, 4, 6, 7, 8}));
+    }
+    
+    [Test]
+    public void ZeroTest()
+    {
+      Assert.AreEqual(0, Kata.FirstNonConsecutive(new int[] {-3, -2, 0, 1, 2}));
+    }
+    
+    [Test]
+    public void NegativeTest()
+    {
+      Assert.AreEqual(-1, Kata.FirstNonConsecutive(new int[] {-3, -1, 0, 1, 2}));
+    }
+    
+    [Test]
+    public void SequentialTest()
+    {
+      Assert.AreEqual(null, Kata.FirstNonConsecutive(new int[] {1, 2, 3, 4}));
+    }
+    
+    private static object Solution(int[] arr)
+    {
+      for (int i = 0; i < arr.Length; ++i)
+      {
+        if (i + 1 == arr.Length) break;
+      
+        if (arr[i] + 1 != arr[i + 1])
+        {
+          return arr[i + 1];
+        }
+      }
+      return null;
+    }
+    
+    private Random rnd = new Random();
+    
+    [Test]
+    public void RandomTest()
+    {
+      for (int i = 0; i < 10; ++i)
+      {
+        List<int> testList = new List<int>();
+        int offset = rnd.Next(0, 20) - 10;
+        for (int j = 0; j < 20; ++j)
+        {
+          testList.Add(offset + (rnd.Next(0, 9)));
+        }
+        testList.Sort((a, b) => a - b);
+        testList = testList.Distinct().ToList();
+        Console.WriteLine(string.Join(", ", testList.ToArray()));
+        object first = Kata.FirstNonConsecutive(testList.ToArray());
+        object expected = Solution(testList.ToArray());
+        
+        Assert.AreEqual(expected, first);
+      }
+    }
+  }
+}
