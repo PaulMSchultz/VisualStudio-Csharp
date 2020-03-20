@@ -1,0 +1,65 @@
+using System;
+
+public class Number
+{
+  public int DigitalRoot(long n)
+  {
+      
+            int sum = 0;
+            long x = 0;
+
+            while (n > 0)
+            {
+                x = n % 10;
+                //Console.WriteLine(x);
+                sum = sum + Convert.ToInt32(x);
+                n /= 10;
+                //Console.WriteLine("sum is: {0} - n is: {1}",sum,n);
+            }
+
+            n = sum;
+
+            while (n > 10)
+            {
+                sum = 0;
+                n = DigitalRoot(n);
+            }
+
+            sum = Convert.ToInt32(n);
+            return sum;
+  }
+}
+
+*********************************************************************************
+
+Test Cases:
+using NUnit.Framework;
+
+[TestFixture]
+public class NumberTest
+{
+  private Number num;
+  
+  [SetUp]
+  public void SetUp() 
+  {
+    num = new Number();
+  }
+
+  [TearDown]
+  public void TearDown()
+  {
+    num = null;
+  }
+
+  [Test]
+  public void Tests()
+  {
+    Assert.AreEqual(7, num.DigitalRoot(16));      
+    Assert.AreEqual(6, num.DigitalRoot(195));      
+    Assert.AreEqual(2, num.DigitalRoot(992));      
+    Assert.AreEqual(9, num.DigitalRoot(999999999999));      
+    Assert.AreEqual(9, num.DigitalRoot(167346));      
+    Assert.AreEqual(0, num.DigitalRoot(0));      
+  }
+}
