@@ -1,0 +1,257 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Trees
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string cell = "A1";
+            string cell2 = "C2";
+            string cell3 = "D4";
+
+            Console.WriteLine(ChessKnight(cell));
+            Console.WriteLine(ChessKnight(cell2));
+            Console.WriteLine(ChessKnight(cell3));
+
+        }
+        public static int ChessKnight(string cell)
+        {
+            string _letterX = cell[0].ToString();
+            int x = 0;
+
+            switch (_letterX)
+            {
+                case "A":
+                    x = 1;
+                    break;
+                case "B":
+                    x = 2;
+                    break;
+                case "C":
+                    x = 3;
+                    break;
+                case "D":
+                    x = 4;
+                    break;
+                case "E":
+                    x = 5;
+                    break;
+                case "F":
+                    x = 6;
+                    break;
+                case "G":
+                    x = 7;
+                    break;
+                case "H":
+                    x = 8;
+                    break;
+                default:
+                    Console.WriteLine("error.");
+                    break;
+            }
+
+            string _letterY = cell[1].ToString().ToUpper();
+            int y = Convert.ToInt32(_letterY);
+
+            int sum = UpLeft(x, y) + UpRight(x, y) + RightUp(x, y) + RightDown(x, y) + DownLeft(x, y) + DownRight(x, y) + LeftUp(x, y) + LeftDown(x, y);
+
+            return sum;
+
+        }
+
+        public static int UpLeft(int x, int y)
+        {
+            if(x - 1 < 1 || y + 2 > 8)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int UpRight(int x, int y)
+        {
+            if (x + 1 > 8 || y + 2 > 8)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int RightUp(int x, int y)
+        {
+            if (x + 2 > 8 || y + 1 > 8)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int RightDown(int x, int y)
+        {
+            if (x + 2 > 8 || y - 1 < 1)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int DownLeft(int x, int y)
+        {
+            if (x - 1 < 1 || y - 2 < 1)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int DownRight(int x, int y)
+        {
+            if (x + 1 > 8 || y - 2 < 1)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int LeftUp(int x, int y)
+        {
+            if (x - 2 < 1 || y + 1 > 8)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+        public static int LeftDown(int x, int y)
+        {
+            if (x - 2 < 1 || y - 1 < 1)
+            {
+                return 0;
+            }
+            else { return 1; }
+        }
+
+    }
+}
+
+____________________________________________________________________________________________
+
+Test Cases:
+namespace myjinxin
+{
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    //using System.Text;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    [TestFixture]
+    public class CsharpTest
+    {
+public int An(string cell){
+  int x=cell[0]-96,y=cell[1]-48;
+  return new int[][]{
+  new int[]{x-2,y-1},
+  new int[]{x-2,y+1},
+  new int[]{x-1,y-2},
+  new int[]{x-1,y+2},
+  new int[]{x+2,y-1},
+  new int[]{x+2,y+1},
+  new int[]{x+1,y-2},
+  new int[]{x+1,y+2}}.Count(z=>z[0]>0&&z[1]>0&&z[0]<9&&z[1]<9);
+} 
+public string rndtest(){
+  return ""+(char)rand(97,104)+rand(1,8);
+  
+}
+public void shuff(List<int> r){
+  for(int i=0;i<50;i++){
+    int idx1=rand(0,r.Count-1),idx2=rand(0,r.Count-1);
+    var tt=r[idx1];
+    r[idx1]=r[idx2];
+    r[idx2]=tt;
+  }
+}
+
+        public int[] rndtest1(){
+          var r=new List<int>();
+          int len=rand(500,3000);
+          for(var i=0;i<len;i++) r.Add(rand(1,1000));
+          return r.ToArray();
+        }
+        Random rndnum=new Random(unchecked((int)DateTime.Now.Ticks));
+        public int rand(int a,int b){
+          return a>b?rand(b,a):rndnum.Next(a,b+1);
+        }
+        public string rnds(){
+          var len= rand(1,100);
+          var rs=new List<char>();
+          for (int i=0;i<len;i++) rs.Add(rndcl());
+          return string.Join("",rs);
+        }
+        public string rndss(){
+          var len= rand(3,7);
+          var rs=new List<string>();
+          for (int i=0;i<len;i++) rs.Add(rnds());
+          return string.Join(" ",rs);
+        }
+        public string rnds2(int n){
+          var len= n;
+          var rs=new List<char>();
+          for (int i=0;i<len;i++) rs.Add(rndch());
+          return string.Join("",rs);
+        }
+        public char rndcl(){
+          var allc="abcdefghijklmnopqrstuvwxyz";
+          return allc[rand(0,allc.Length-1)];
+        }
+        public char rndchl(){
+          var allc="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          return allc[rand(0,allc.Length-1)];
+        }
+        public char rndch(){
+          var allc="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          return allc[rand(0,allc.Length-1)];
+        }
+        [Test]
+        public void Test1__Basic_Tests(){
+            var kata=new Kata();
+            var passed="<font size=2 color='#8FBC8F'>Test Passed!</font>\n";
+            
+            Assert.AreEqual(2,kata.ChessKnight("a1"));
+            Console.WriteLine(passed);
+            Assert.AreEqual(6,kata.ChessKnight("c2"));
+            Console.WriteLine(passed);
+            Assert.AreEqual(8,kata.ChessKnight("d4"));
+            Console.WriteLine(passed);
+            Assert.AreEqual(6,kata.ChessKnight("g6"));
+            Console.WriteLine(passed);
+            Console.WriteLine(" ");
+            
+        }
+        
+        [Test]
+        public void Test2__100_Random_Tests(){
+          var kata=new Kata();
+          var passed="<font size=2 color='#8FBC8F'><b>Test Passed!</b></font>";
+            
+          for (int i=0;i<100;i++){
+              var ab=rndtest();
+              Console.WriteLine("<font size=2 color='#CFB53B'>Testing for: "+
+              "\ncell = \""+ab+"\""
+              //+"\npawn = \""+ab[1]+"\""
+              //+", numberOfDigits = "+ab[1]
+              //+", loved = "+ab[2]
+              //+", s = "+ab[3]
+              +"</font>");
+              var answer=An(ab);
+              Assert.AreEqual(answer, kata.ChessKnight(ab));
+              Console.WriteLine("<font size=2 color='#8FBC8F'>"+
+              "Pass Value = "+answer+"</font>\n");
+              Console.WriteLine(" ");
+            }
+          
+          Console.WriteLine("<div style='width:360px;background-color:gray'><br><font size=2 color='#3300dd'><b>Happy Coding ^_^</b></font>");
+          Console.WriteLine("<br><font size=2 color='#5500ee'><b>Thanks for solve this kata,\nI'm waiting for your:<font color='993300'>\nfeedback, voting and ranking ;-)</b></font></div>");
+          
+        }
+    }
+} 
