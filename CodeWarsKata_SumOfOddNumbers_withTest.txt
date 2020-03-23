@@ -1,0 +1,54 @@
+using System;
+public static class Kata
+{
+  public static long rowSumOddNumbers(long n)
+  {
+    long startNumber = GetStartNumber(n);
+            long sumResult = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                sumResult = sumResult + startNumber;
+                startNumber = startNumber + 2;
+            }
+            return sumResult;
+  }
+  
+  public static long GetStartNumber(long n)
+  {
+      long row = 1;
+      long nextRow = 2;
+      long result = 1;
+      
+      while(row < n)
+      {
+          result = result + nextRow;
+          nextRow = nextRow + 2;
+          row++;
+      }
+      return result;
+  }
+}
+
+--------------------------------------------------------------------------
+
+Test Cases:
+using System;
+using NUnit.Framework;
+[TestFixture]
+public class Test
+{
+[Test]
+  public void RandomInput() 
+  {
+    Random rnd = new Random();
+            
+    for (long i=0; i< 50; i++)
+    {
+      long n = rnd.Next(500) + 1;
+      Assert.AreEqual(n*n*n,Kata.rowSumOddNumbers(n));
+    }
+    
+  }
+  
+}
