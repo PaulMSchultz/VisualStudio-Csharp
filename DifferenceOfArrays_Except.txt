@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] arr1 = new string[] { "shark", "cow", "moose", "horse", "owl", "cat", "cat", "cat", "cat" };
+
+            string[] arr2 = new string[] { "cow", "moose", "owl", "cat"};
+
+            string[] result = DifferenceOfArrays(arr1,arr2);
+
+            foreach(string item in result)
+            {
+                Console.WriteLine(item);
+            }
+
+        }
+
+        public static string[] DifferenceOfArrays(string[] arr1, string[] arr2) 
+        {
+            var result = arr1.Except(arr2).ToArray();
+            return result;
+        }
+
+
