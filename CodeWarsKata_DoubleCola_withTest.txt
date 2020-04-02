@@ -1,0 +1,224 @@
+using System;
+using System.Collections.Generic;
+
+public class Line
+    {
+        public static string WhoIsNext(string[] names , long n)
+        { 
+            // **************This Timed Out for Bigger 'n' VALUES********************* //
+            // Queue<string> namesQ =  new Queue<string>(names);
+            //
+            // string personDrinking = "";
+            //
+            // for (int i = 1; i <= n; i++)
+            // {
+            //     personDrinking = namesQ.Dequeue();
+            //     namesQ.Enqueue(personDrinking);
+            //     namesQ.Enqueue(personDrinking);
+            // }
+            // 
+            // return personDrinking;
+            
+            
+            long k = names.Length;
+            long totalLen = k;
+            int i = 2;
+            long startNewLen = k;
+            int counter = 0;
+
+            while(totalLen < n)
+            {
+                counter++;
+                startNewLen = totalLen + 1;
+                totalLen = totalLen + (k * i);                
+                i = i * 2;
+            }
+            
+            i = i / 2;
+            long positionCounter = k;
+            while (totalLen > n)
+            {
+                if(n > totalLen - i)
+                {
+                    return names[positionCounter - 1];
+                }
+                else
+                {
+                    positionCounter--;
+                    totalLen = totalLen - i;
+                }
+            }
+
+            return names[positionCounter-1];            
+            
+        }
+    }
+
+************************************************************************************************
+
+Test Cases:
+using NUnit.Framework;
+  using System;
+  [TestFixture]
+  public class ListTests
+  { 
+    [Test]
+    public void Test1()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 1;
+      Assert.AreEqual("Sheldon",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test2()
+    {
+       string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+       int n = 6;
+       Assert.AreEqual("Sheldon",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test3()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 1802;
+      Assert.AreEqual("Penny",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test4()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 2;
+      Assert.AreEqual("Leonard",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test5()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 3;
+      Assert.AreEqual("Penny",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test6()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 10;
+      Assert.AreEqual("Penny",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test7()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 534;
+      Assert.AreEqual("Rajesh",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test8()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 5033;
+      Assert.AreEqual("Howard",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test9()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 10010;
+      Assert.AreEqual("Howard",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test10()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 63;
+      Assert.AreEqual("Rajesh",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test11()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 841;
+      Assert.AreEqual("Leonard",Line.WhoIsNext(((string[])names.Clone()), n));
+    }
+
+    [Test]
+    public void Test12()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 3667;
+      Assert.AreEqual("Penny",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test13()
+    {
+     string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 38614;
+      Assert.AreEqual("Howard",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test14()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 1745;
+      Assert.AreEqual("Leonard",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test15()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 8302;
+      Assert.AreEqual("Rajesh",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test16()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      int n = 12079;
+      Assert.AreEqual("Sheldon",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test17()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      long n = 28643950;
+      Assert.AreEqual("Leonard",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test18()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      long n = 159222638;
+      Assert.AreEqual("Howard",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test19()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      long n = 121580142;
+      Assert.AreEqual("Penny",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+
+    [Test]
+    public void Test20()
+    {
+      string[] names = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+      long n = 1000000000;
+      Assert.AreEqual("Penny",Line.WhoIsNext(((string[])names.Clone()), n)); 
+    }
+}
