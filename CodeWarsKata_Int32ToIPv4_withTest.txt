@@ -1,0 +1,130 @@
+using System;
+using System.Text;
+
+
+public class Kata
+{
+  public static string UInt32ToIP(uint ip)
+  {
+            StringBuilder sb = new StringBuilder();
+
+            long iP = (long)ip;
+            long twosPlace = 1;
+            int counter = 0;
+            while (twosPlace <= iP)
+            {
+                twosPlace *= 2;
+                counter++;
+            }
+            twosPlace /= 2;
+
+            while (twosPlace > 0)
+            {
+                if(iP - twosPlace >= 0)
+                {
+                    sb.Append("1");
+                    iP -= twosPlace;
+                    twosPlace /= 2;
+                }
+                else
+                {
+                    sb.Append("0");
+                    twosPlace /= 2;
+                }
+            }
+
+            while (sb.Length != 32)
+            {
+                sb.Insert(0, "0", 1);
+            }
+
+            string s = sb.ToString();
+            string[] arr = new string[4];
+            arr[0] = s.Substring(0, 8);
+            arr[1] = s.Substring(8, 8);
+            arr[2] = s.Substring(16, 8);
+            arr[3] = s.Substring(24, 8);
+
+            string[] resultArr = new string[4];
+
+            for (int j = 0; j < arr.Length; j++)
+            {                
+                int place = 128;
+                int total = 0;
+
+                foreach(char c in arr[j])
+                {                    
+                    if (c == '1')
+                    {
+                        total += place;
+                    }
+                    place /= 2;
+                }
+                resultArr[j] = total.ToString();
+            }
+
+            StringBuilder returnThis = new StringBuilder();
+            for (int k = 0; k < resultArr.Length; k++)
+            {                
+                returnThis.Append(resultArr[k]);
+                if(k != resultArr.Length - 1)
+                {
+                    returnThis.Append(".");
+                }
+            }
+            return returnThis.ToString();
+  }
+}
+
+***********************************************************************************
+
+Test Cases:
+namespace Solution 
+{
+  using NUnit.Framework;
+  using System;
+
+  [TestFixture]
+  public class Sample_Test
+  {
+    [Test, Description("Sample Tests")]
+    public void Test()
+    {
+      Assert.AreEqual("128.114.17.104", Kata.UInt32ToIP(2154959208));
+      Assert.AreEqual("0.0.0.0", Kata.UInt32ToIP(0));
+      Assert.AreEqual("128.32.10.1", Kata.UInt32ToIP(2149583361));
+    }
+  }
+  
+  [TestFixture]
+  public class Random_Test
+  {
+    private static Random random = new Random();
+    
+    private static string solution(uint ip)
+    {
+      return (ip >> 24) % 256 + "." +
+             (ip >> 16) % 256 + "." +
+             (ip >> 8)  % 256 + "." +
+             (ip)       % 256;
+    }
+    
+    [Test, Description("Random Tests")]
+    public void Test()
+    {
+      const int Tests = 100;
+      
+      for (int i = 0; i < Tests; ++i)
+      {
+        uint thirtyBits = (uint) random.Next(1 << 30);
+        uint twoBits = (uint) random.Next(1 << 2);
+        uint fullRange = (thirtyBits << 2) | twoBits;
+        
+        string expected = solution(fullRange);
+        string actual = Kata.UInt32ToIP(fullRange);
+        
+        Assert.AreEqual(expected, actual);
+      }
+    }
+  }
+}

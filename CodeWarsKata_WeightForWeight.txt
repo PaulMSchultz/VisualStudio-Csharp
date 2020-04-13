@@ -1,0 +1,137 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+public class WeightSort {
+  
+  public static string orderWeight(string strng)
+  {
+          string[] arr = strng.Split(' ');
+
+            SortedDictionary<string, int> dict = new SortedDictionary<string, int>();
+            List<string> duplicates = new List<string>();
+            int temp = 0;
+            foreach(var item in arr)
+            {
+                if (dict.ContainsKey(item))
+                {
+                    duplicates.Add(item);
+                }
+                else
+                {
+                    foreach (char c in item)
+                    {
+                        temp += (int)char.GetNumericValue(c);
+                    }
+                    dict.Add(item, temp);
+                    temp = 0;
+                }                
+            }
+
+            StringBuilder sb = new StringBuilder();
+            string lowest = "";
+            int low = 1000;
+            for (int i = 0; i < arr.Length; i++)
+            {                
+                foreach(KeyValuePair<string, int> pair in dict)
+                {
+                    if (pair.Value < low)
+                    {
+                        low = pair.Value;
+                        lowest = pair.Key;
+                    }
+                }
+
+                if(dict.Count == 0)
+                {
+                    return sb.ToString();
+                }
+
+                sb.Append(lowest);
+                if(i != arr.Length - 1 && dict.Count  > 1)
+                {
+                    sb.Append(" ");
+                }
+                dict.Remove(lowest);
+
+                while (duplicates.Contains(lowest))
+                {
+                    sb.Append(lowest + " ");
+                    duplicates.Remove(lowest);
+                }
+
+                low = 1000;
+            }
+
+            return sb.ToString();
+  }
+}
+
+*******************************************************************************
+
+Test Cases:
+using System;
+using NUnit.Framework;
+
+[TestFixture]
+public class WeightSortTests {
+
+[Test]
+    public void Test1() {
+      Console.WriteLine("****** Basic Tests");    
+      Assert.AreEqual("2000 103 123 4444 99", WeightSort.orderWeight("103 123 4444 99 2000"));
+      Assert.AreEqual("11 11 2000 10003 22 123 1234000 44444444 9999", WeightSort.orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"));
+      Assert.AreEqual("", WeightSort.orderWeight(""));
+      Assert.AreEqual("2000 10003 1234000 44444444 9999 123456789", WeightSort.orderWeight("10003 1234000 44444444 9999 2000 123456789"));
+      String a = "3 16 9 38 95 1131268 49455 347464 59544965313 496636983114762 85246814996697";
+      String r = "3 16 9 38 95 1131268 49455 347464 59544965313 496636983114762 85246814996697";
+      Assert.AreEqual(r, WeightSort.orderWeight(a));
+      a = "71899703 200 6 91 425 4 67407 7 96488 6 4 2 7 31064 9 7920 1 34608557 27 72 18 81";
+      r = "1 2 200 4 4 6 6 7 7 18 27 72 81 9 91 425 31064 7920 67407 96488 34608557 71899703";
+      Assert.AreEqual(r, WeightSort.orderWeight(a));
+      a = "387087 176 351832 100 430372 8 58052 54 175432 120 269974 147 309754 91 404858 67 271476 164 295747 111 40";
+      r = "100 111 120 40 8 54 91 164 147 67 176 430372 58052 175432 351832 271476 309754 404858 387087 295747 269974";
+      Assert.AreEqual(r, WeightSort.orderWeight(a));
+    }
+    //--------------------
+    private static int weightStrNbSol(string strng) {
+      char[] digits = strng.ToCharArray();
+      int dsum = 0;
+      foreach (char d in digits) {
+        int dgt = int.Parse(d.ToString());
+        dsum += dgt;
+      }
+      return dsum;
+    }
+    private static int cmpSol(string x, string y) {
+      int cp =  weightStrNbSol(x) - weightStrNbSol(y);
+      if (cp == 0) 
+        return string.Compare(x, y);
+      if (cp < 0) return -1; else return 1;
+    }
+    private static string orderWeightSol(string strng) {
+      string[] lstr = strng.Split(' ');   
+      Array.Sort(lstr, cmpSol);
+      string res = string.Join(" ", lstr);
+      return res;
+    }
+    private static string doEx() {
+      string res = "";
+      Random rnd = new Random();
+      for (int i =  0; i < 20; i++) {
+        int n = rnd.Next(1, 500000);
+        res += n + " ";
+      }
+      return res + rnd.Next(1, 100);
+    }
+    //--------------------
+[Test]
+    public static void Test2() {
+      Console.WriteLine("\n 50 Random Tests ****************");
+      for (int i = 0; i < 50; i++) {    
+        String a = WeightSortTests.doEx();
+        // Console.WriteLine("Order Weight " + a);
+        Assert.AreEqual(WeightSortTests.orderWeightSol(a), WeightSort.orderWeight(a));
+      }
+   }
+}
