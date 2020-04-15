@@ -1,0 +1,45 @@
+using System;
+
+public static class TimeFormat
+{
+    public static string GetReadableTime(int seconds)
+    {
+        int minutes = 0;
+            int hours = 0;
+
+            if (seconds > 59)
+            {
+                minutes = seconds / 60;
+                seconds = seconds % 60;
+                if (minutes > 59)
+                {
+                    hours = minutes / 60;
+                    minutes = minutes % 60;                    
+                }                
+            }
+
+            string sec = seconds.ToString();
+            string min = minutes.ToString();
+            string hr = hours.ToString();
+            
+            if (sec.Length < 2)
+            {
+                sec = sec.Insert(0, "0");
+            }
+
+            if (min.Length < 2)
+            {
+                min = min.Insert(0, "0");
+            }
+
+            if (hr.Length < 2)
+            {
+                hr = hr.Insert(0, "0");
+            }
+
+            return hr + ":" + min + ":" + sec;
+    }
+}
+
+**********************************************************
+

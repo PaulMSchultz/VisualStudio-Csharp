@@ -1,0 +1,42 @@
+using System;
+
+public class Deadfish
+{
+  public static int[] Parse(string data)
+  {
+    int counter = 0;
+            foreach(char c in data)
+            {
+                if(c == 'o')
+                {
+                    counter++;
+                }
+            }
+
+            int[] arr = new int[counter];
+
+            counter = 0;
+            int index = 0;
+            foreach(char c in data)
+            {
+                if(c == 'i')
+                {
+                    counter++;
+                }
+                else if (c == 'd')
+                {
+                    counter--;
+                }
+                else if (c == 's')
+                {
+                    counter = counter * counter;
+                }
+                else if(c == 'o')
+                {
+                    arr[index] = counter;
+                    index++;
+                }
+            }
+            return arr;
+  }
+}
