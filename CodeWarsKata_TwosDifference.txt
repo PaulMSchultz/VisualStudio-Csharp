@@ -1,0 +1,57 @@
+using System.Linq;
+
+public class Kata
+{
+  public static (int, int)[] TwosDifference(int[] input)
+  {
+    return input
+      .OrderBy(i => i)
+      .Where(i => input.Contains(i + 2))
+      .Select(i => (i, i + 2))
+      .ToArray();
+  }
+}
+
+
+***********************************************************************************
+public static (int, int)[] TwosDifference(int[] array)
+        {
+            int count = 0;
+            List<int> ls = new List<int>();
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                for (int j = i; j < array.Length; j++)
+                {
+                    if (i != j)
+                    {
+                        if (array[i] + 2 == array[j] || array[i] - 2 == array[j]) 
+                        {
+                            ls.Add(array[j]);
+                            ls.Add(array[i]);
+                            count++;
+                        }
+                    }
+                }
+            }
+            count = 0;
+            int counter = 0;
+            (int, int)[] result = new (int, int)[ls.Count/2];
+            while (counter < (ls.Count/2))
+            {
+                if (ls[count] <= ls[count + 1])
+                {
+                    result[counter] = (ls[count], ls[count + 1]);
+                    counter++;
+                    count += 2;
+                }
+                else
+                {
+                    result[counter] = (ls[count+1], ls[count]);
+                    counter++;
+                    count += 2;
+                }                
+            }
+            Array.Sort(result);
+            return result;
+        }
