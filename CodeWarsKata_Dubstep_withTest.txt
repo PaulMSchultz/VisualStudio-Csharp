@@ -1,0 +1,164 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text;
+
+public class Dubstep
+    {
+        public static string SongDecoder(string input)
+        { 
+           StringBuilder sb = new StringBuilder();
+
+            string temp = input.Replace("WUB", " ");
+            string[] arr = temp.Split(' ');
+            temp = "";
+
+            foreach(var item in arr)
+            {
+                if (item != String.Empty)
+                {
+                    sb.Append(item);
+                        if (item != arr[arr.Length - 1])
+                        {
+                            sb.Append(" ");
+                        }                    
+                }                
+            }
+            
+            if(sb[sb.Length-1] == ' ')
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
+            
+            return sb.ToString();
+        }
+    }
+
+****************************************************************************
+
+Test Cases:
+using NUnit.Framework;
+  using System;
+  [TestFixture]
+  public class DubstepTests
+  { 
+    [Test]
+    public void Test1()
+    {
+      Assert.AreEqual("ABC", Dubstep.SongDecoder("WUBWUBABCWUB"));
+    }
+
+    [Test]
+    public void Test2()
+    {
+      Assert.AreEqual("R L", Dubstep.SongDecoder("RWUBWUBWUBLWUB"));
+    }
+
+    [Test]
+    public void Test3()
+    {
+       Assert.AreEqual("JKD WBIRAQKF YE WV", Dubstep.SongDecoder("WUBJKDWUBWUBWBIRAQKFWUBWUBYEWUBWUBWUBWVWUBWUB"));
+    }
+
+    [Test]
+    public void Test4()
+    {
+     Assert.AreEqual("KSDHEMIXUJ R S H", Dubstep.SongDecoder("WUBKSDHEMIXUJWUBWUBRWUBWUBWUBSWUBWUBWUBHWUBWUBWUB"));
+    }
+
+    [Test]
+    public void Test5()
+    {
+      Assert.AreEqual("Q QQ I WW JOPJPBRH", Dubstep.SongDecoder("QWUBQQWUBWUBWUBIWUBWUBWWWUBWUBWUBJOPJPBRH"));
+    }
+
+    [Test]
+    public void Test6()
+    {
+      Assert.AreEqual("O IPVCQAFWY Q XHDKCPYKCTWWY V FZ", Dubstep.SongDecoder("WUBWUBOWUBWUBWUBIPVCQAFWYWUBWUBWUBQWUBWUBWUBXHDKCPYKCTWWYWUBWUBWUBVWUBWUBWUBFZWUBWUB"));
+    }
+
+    [Test]
+    public void Test7()
+    {
+      Assert.AreEqual("YYRTSMNWU C C FSYUINDWOBV F AU V JB", Dubstep.SongDecoder("WUBYYRTSMNWUWUBWUBWUBCWUBWUBWUBCWUBWUBWUBFSYUINDWOBVWUBWUBWUBFWUBWUBWUBAUWUBWUBWUBVWUBWUBWUBJB"));
+    }
+
+    [Test]
+    public void Test8()
+    {
+      Assert.AreEqual("KSDHEMIXUJ R S H", Dubstep.SongDecoder("WUBKSDHEMIXUJWUBWUBRWUBWUBWUBSWUBWUBWUBHWUBWUBWUB"));
+    }
+
+    [Test]
+    public void Test9()
+    {
+      Assert.AreEqual("A", Dubstep.SongDecoder("AWUBWUBWUB"));
+    }
+
+    [Test]
+    public void Test10()
+    {
+      Assert.AreEqual("A B C D", Dubstep.SongDecoder("AWUBBWUBCWUBD"));
+    }
+
+    [Test]
+    public void Test11()
+    {
+      Assert.AreEqual("W U B", Dubstep.SongDecoder("WUBWWUBWUBWUBUWUBWUBBWUB"));
+    }
+
+    [Test]
+    public void Test12()
+    {
+      Assert.AreEqual("WU BW UB", Dubstep.SongDecoder("WUWUBBWWUBUB"));
+    }
+
+    [Test]
+    public void Test13()
+    {
+      Assert.AreEqual("WUAB", Dubstep.SongDecoder("WUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUABWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUBWUB"));
+    }
+
+    [Test]
+    public void Test14()
+    {
+      Assert.AreEqual("U", Dubstep.SongDecoder("U"));
+    }
+
+    [Test]
+    public void Test15()
+    {
+      Assert.AreEqual("WU", Dubstep.SongDecoder("WUWUB"));
+    }
+
+    [Test]
+    public void Test16()
+    {
+      Assert.AreEqual("UB", Dubstep.SongDecoder("UBWUB"));
+    }
+
+    [Test]
+    public void Test17()
+    {
+      Assert.AreEqual("WU UB U", Dubstep.SongDecoder("WUWUBUBWUBUWUB"));
+    }
+
+    [Test]
+    public void Test18()
+    {
+      Assert.AreEqual("W A", Dubstep.SongDecoder("WUBWWUBAWUB"));
+    }
+
+    [Test]
+    public void Test19()
+    {
+      Assert.AreEqual("WUUUUU", Dubstep.SongDecoder("WUUUUU"));
+    }
+
+    [Test]
+    public void Test20()
+    {
+      Assert.AreEqual("A", Dubstep.SongDecoder("WUBWUBA"));
+    }
+}
