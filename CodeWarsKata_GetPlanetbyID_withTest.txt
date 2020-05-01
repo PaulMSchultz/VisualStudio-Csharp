@@ -1,0 +1,64 @@
+public class Kata
+{
+  public static string GetPlanetName(int id)
+  {
+    string name = "NoneSelected";
+    switch(id)
+    {
+      case 1:
+        name = "Mercury";
+        return name;
+      case 2:
+        name = "Venus";
+        return name;
+      case 3:
+        name = "Earth";
+        return name;
+      case 4:
+        name = "Mars";
+        return name;
+      case 5:
+        name = "Jupiter";
+        return name;
+      case 6:
+        name = "Saturn";
+        return name;
+      case 7:
+        name = "Uranus";
+        return name;
+      case 8:
+        name = "Neptune";
+        return name;
+    }
+    
+    return name;
+  }
+}
+
+***************************************************
+
+Test Cases:
+namespace Solution {
+  using NUnit.Framework;
+  using System;
+
+  [TestFixture]
+  public class SolutionTest
+  {
+    private static Random rnd = new Random();
+  
+    private static string solution(int id) => new string[] {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"}[--id];
+  
+    [Test, Description("Random Tests")]
+    public void Test()
+    {
+      for (int i = 0; i < 100; ++i)
+      {
+        int test = rnd.Next(1, 9);
+        string expected = solution(test);
+        string actual = Kata.GetPlanetName(test);
+        Assert.AreEqual(expected, actual);
+      }
+    }
+  }
+}
